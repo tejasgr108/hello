@@ -32,9 +32,12 @@ import model.bookticketmodel;
 			}
 			else if(pages.equals("signin")) {
 				request.getServletContext().getRequestDispatcher("/signin.jsp").forward(request, response);
+				
 			}
 			else if(pages.equals("displaymovies")) {
 				request.getServletContext().getRequestDispatcher("/displaymovies.jsp").forward(request, response);
+			}else if(pages.equals("contactus")) {
+				request.getServletContext().getRequestDispatcher("/contactus.jsp").forward(request, response);
 			}
 			else {
 				response.sendRedirect("/homepage.jsp");
@@ -61,13 +64,24 @@ import model.bookticketmodel;
 					request.getParameter("password"),request.getParameter("email"),request.getParameter("contact"));
 			createusermethod(createuser);
 		}
+		else if(book.equals("signinmethod")){
+			User sample = new User(request.getParameter("username"),request.getParameter("password"));
+			signinmethod(  sample);
+			
+		}
 		else {
 			response.sendRedirect("/homepage.jsp");
 		}
 	}
 
 
-	private void createusermethod(book.User createuser) {
+	private void signinmethod( User sample) {
+		new bookticketmodel().signin(datasource, sample);
+		
+	}
+
+
+	private void createusermethod(User createuser) {
 	      new bookticketmodel().createuser(datasource , createuser);
 		
 	}
@@ -75,6 +89,7 @@ import model.bookticketmodel;
 
 	private void bookticketmethod(BookTicket booknewticket) {
 		new bookticketmodel().booktickett1(datasource,booknewticket);
+		
 		return;
 		
 	}

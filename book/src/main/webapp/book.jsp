@@ -7,10 +7,14 @@
 <title>Book Tickets</title>
 </head>
 <body>
+<%@include file="include/header1.jsp" %>
+
+<form action="<%=request.getContextPath() %>/controller" method="post" id="SearchForm">
 <h1> BOOK TICKETS</h1>
-<form action="<%=request.getContextPath() %>/controller" method="post">
+
+
 seat:<br/><input type="checkbox" name ="seat" value="a1">a1
-     <input type="checkbox" name ="seat" value="a2">a2
+     <input type="checkbox" name ="seat"  value="a2">a2
      <input type="checkbox" name ="seat" value="a3">a3
      <input type="checkbox" name ="seat" value="a4">a4
      <input type="checkbox" name ="seat" value="a5">a5
@@ -44,8 +48,11 @@ seat:<br/><input type="checkbox" name ="seat" value="a1">a1
      
      <input type="hidden" name="form" value="bookticketsmethod">
      <input type="submit" name="book">
+     
+     
 
 </form>
+<%@include file="include/footer1.jsp" %>
 
 </body>
 </html>

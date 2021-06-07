@@ -7,8 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="include/header.jsp" %>
-
-<%@include file="include/footer.jsp" %>
+<%@include file="include/header1.jsp" %>
+<div class="container mtb">
+	<div class="row">
+		<div class="col-lg-6">
+		
+		
+		
+		</div>
+    </div>
+</div>
+<%@include file="include/footer1.jsp" %>
 </body>
 </html>
