@@ -6,8 +6,9 @@
 <meta charset="ISO-8859-1">
 <title>signin</title>
 </head>  
+<%@ include file="include/header.jsp" %>
 <body>
-<%@include file="include/header1.jsp" %>
+
 <div class="container mtb">
 	<div class="row">
 		<div class="col-lg-6">
@@ -28,6 +29,7 @@
 		            <input type="submit"  class="btn btn-primary"  value="submit" >
 		
 		   </form>
+		  
 		   <script>
 		   function validate(){
 			   var username = document.getElementById("username");
@@ -51,7 +53,9 @@
 		</div>
 	</div>
 </div>
-<%@include file="include/footer1.jsp" %>
+   
+   
+
 
 		
 

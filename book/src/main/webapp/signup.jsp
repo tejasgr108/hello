@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Sign in form</title>
+<title>Sign in </title>
 
 </head>
+<%@ include file="include/header.jsp" %>
 <body>
 
-<%@include file="include/header1.jsp" %>
+
 <div class="container mtb">
 	<div class="row">
 		<div class="col-lg-6">
@@ -45,9 +46,10 @@
 			<input type="submit" class="btn btn-primary" value="Submit" />
 		
 		</form>
+	
 			
 			<script>
-			function execute(){
+			  function execute(){
 				var fname = document.getElementById("first_name");
 				var lname = document.getElementById("last_name");
 				var uname = document.getElementById("username");
@@ -63,7 +65,7 @@
 				var contact =/^([1-9]{1,2})+([1-9]{8,11})$/;
 			
 				
-				/**if(!firstname.test(fname)||fname.value == ""){
+				if(!firstname.test(fname)||fname.value == ""){
 					alert("enter valid firstname");
 					
 					return false;
@@ -110,7 +112,7 @@
 				else{
 					return true;
 				}
-			}**/
+			}
 			
 			</script>
 			
@@ -118,10 +120,9 @@
 		</div>
 	</div>
 </div>
-			
-		
 
 
-<%@include file="include/footer1.jsp" %>
+
+
 </body>
 </html>
