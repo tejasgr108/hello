@@ -8,6 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>Movie Seat Booking</title>
+    <style type="text/css">
+        #maindiv .col-xl-1{
+        border:1px solid;
+        width:100px;
+        height:100px;
+        }
+    </style>  
+  
   </head>
   <body>
      <div class="conatiner">
@@ -15,10 +23,10 @@
          Ticket Amount : <span>1000</span>
      </div>
      <div class ="conatiner">
-         <div class = "row">
-           <div class="col-xl-1">1<br/>100</div>
-         </div>
+         <div class = "row" id ="maindiv">
+       </div>
      </div>
+     <script type="text/javascript" src="booking.js"></script>
 
   </body>
 </html>

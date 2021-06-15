@@ -8,6 +8,7 @@ import javax.persistence.Table;
 
 
 
+
 @Entity
 @Table(name ="user1")
 public class User {
@@ -26,6 +27,9 @@ public class User {
 	private String email;
 	@Column(name = "contact")
 	private String contact;
+	
+
+	
 	
 	
 	/**
@@ -94,17 +98,23 @@ public class User {
 	public String getContact() {
 		return contact;
 	}
-	
-
-	
-	
 	/**
 	 * @param contact the contact to set
 	 */
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-	public User(String first_name, String last_name, String username, String password, String email, String contact ) {
+	
+
+	
+	
+
+	
+
+	
+	
+	
+	public User(String first_name, String last_name, String username, String password, String email, String contact) {
 		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -114,6 +124,8 @@ public class User {
 		this.contact = contact;
 		
 	}
+	
+	
 	public User() {
 		super();
 	}

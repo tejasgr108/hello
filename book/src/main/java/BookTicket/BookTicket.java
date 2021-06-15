@@ -5,14 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@ Entity
-@Table(name = "book")
+@Entity
+@Table(name="book")
 public class BookTicket {
 	
 	@Id
-	@Column(name = "seat")
+    @Column(name="seat")
 	private String seat;
 	
+    @Column(name="username")
+    private String username;
 	/**
 	 * @return the seat
 	 */
@@ -30,13 +32,43 @@ public class BookTicket {
 	}
 
 
+    /**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
 
-	public BookTicket(String seat) {
+
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	
+
+
+	public BookTicket(String seat, String username) {
 		super();
 		this.seat = seat;
+		this.username = username;
 	}
+
+
+
+	public BookTicket() {
+		super();
+	}
+
+
 	
-	
+
+
+
 	
 
 

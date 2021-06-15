@@ -7,10 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
-import BookTicket.BookTicket;
-import BookTicket.BookTicket1;
-import BookTicket.BookTicket2;
 import book.User;
 
 public class hibernatemodel {
@@ -68,57 +64,9 @@ public class hibernatemodel {
 		
 	}
 
-	public void booktickett1(BookTicket booknewticket) {
-		SessionFactory factory = new Configuration().
-				configure("hibernate.cfg.xml").addAnnotatedClass(BookTicket.class).buildSessionFactory();
-		Session session = factory.getCurrentSession();
-		try {
-			
-			session.beginTransaction();
-			session.save(booknewticket);
-			session.getTransaction().commit();
-			
-		}finally {
-			session.close();
-			factory.close();
-			
-		}
-	}
+	
 
-	public void booktickett2(BookTicket1 booknewticket1) {
-		SessionFactory factory = new Configuration().
-				configure("hibernate.cfg.xml").addAnnotatedClass(BookTicket1.class).buildSessionFactory();
-		Session session = factory.getCurrentSession();
-		try {
-			
-			session.beginTransaction();
-			session.save(booknewticket1);
-			session.getTransaction().commit();
-			
-		}finally {
-			session.close();
-			factory.close();
-			
-		}
-	}
-
-	public void booktickett3(BookTicket2 booknewticket2) {
-		SessionFactory factory = new Configuration().
-				configure("hibernate.cfg.xml").addAnnotatedClass(BookTicket2.class).buildSessionFactory();
-		Session session = factory.getCurrentSession();
-		try {
-			
-			session.beginTransaction();
-			session.save(booknewticket2);
-			session.getTransaction().commit();
-			
-		}finally {
-			session.close();
-			factory.close();
-			
-		}
-	}
 
 
 		
-	}
+}

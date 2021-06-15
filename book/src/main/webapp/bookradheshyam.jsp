@@ -1,60 +1,192 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
+<HTML>
+
+<%@ page language="java" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.lang.*" %>
+
+<%@ page session="true" %>
+<%
+	String rFrom = (String)session.getAttribute("rFrom");
+	String NoPass = (String)session.getAttribute("NoPass");
+
+%>
 <head>
-<meta charset="ISO-8859-1"> 
-<title>Book Tickets</title>
-</head>
-<%@ include file="include/header.jsp" %>
-<body>
+	<LINK href="styles.css" type="text/css" rel="stylesheet">
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var SCount = 0;
 
 
-<form action="<%=request.getContextPath() %>/controller" method="post" >
-<h1> BOOK TICKETS</h1>
+function toggleSelection(Obj)
+	{
+		var s = Obj.src;
+		var Seats = document.forms(0).Seats;
+		var NoSeats = "<%=NoPass%>";
+		
+		if (s.indexOf("images/grey_seat.PNG")>-1)
+		{
+			if(SCount>=parseInt(NoSeats)){
+				alert("Already You have selected the required seats");
+				return;
+			}
+			Obj.src = "images/green_seat.PNG";
+			//alert("--"+Obj.alt);
+			if(Seats.value==""){
+				Seats.value = Obj.alt+",";
+			}else{
+				Seats.value += Obj.alt+",";
+			}
+			SCount++;
+		}else if (s.indexOf("selectedSeat.gif")>-1)
+		{
+			Obj.src = "images/grey_seat.PNG";
+			Seats.value=Seats.value.replace(Obj.alt+",","");
+			SCount--;
+		}else{
+			alert("seat already booked");
+		}
+	}
+//-->
+</SCRIPT>
+<head>
+<body Class='SC'>
+<HR>
+<B><FONT COLOR="#CC00CC" face='verdana'>Seat Selection</FONT></B>
+<HR>
+<BR><BR>
+<FORM ACTION="<%=request.getContextPath() %>/controller" method="post">
+<%
+/*Declaration of variables*/
+
+Connection con=null;
+Statement stmt=null;
+ResultSet rs1=null;
 
 
-seat:<br/><input type="checkbox" name ="seat" id="a1"  value="a1" >a1
-     <input type="checkbox" name ="seat" id="a2"  value="a2">a2
-     <input type="checkbox" name ="seat" id="a3"  value="a3">a3
-     <input type="checkbox" name ="seat" id="a4"  value="a4">a4
-     <input type="checkbox" name ="seat" id="a5"  value="a5">a5
-     <input type="checkbox" name ="seat" id="a6"  value="a6">a6
-     <input type="checkbox" name ="seat" id="a7"  value="a7">a7
-     <input type="checkbox" name ="seat" id="a8"  value="a8">a8
-     <input type="checkbox" name ="seat" id="a9"  value="a9">a9
-     <input type="checkbox" name ="seat" id="a10"  value="a10">a10<br/>
-     <input type="checkbox" name ="seat" id="b1"  value="b1">b1
-     <input type="checkbox" name ="seat" id="b2"  value="b2">b2
-     <input type="checkbox" name ="seat" id="b3"  value="b3">b3
-     <input type="checkbox" name ="seat" id="b4"  value="b4">b4
-     <input type="checkbox" name ="seat" id="b5"  value="b5">b5
-     <input type="checkbox" name ="seat" id="b6" value="b6">b6
-     <input type="checkbox" name ="seat" id="b7" value="b7">b7
-     <input type="checkbox" name ="seat" id="b8"  value="b8">b8
-     <input type="checkbox" name ="seat" id="b9" value="b9">b9
-     <input type="checkbox" name ="seat" id="b10" value="b10">b10<br/>
-     <input type="checkbox" name ="seat" id="c1"  value="c1">c1
-     <input type="checkbox" name ="seat" id="c2" value="c2">c2
-     <input type="checkbox" name ="seat" id="c3" value="c3">c3
-     <input type="checkbox" name ="seat" id="c4"  value="c4">c4
-     <input type="checkbox" name ="seat" id="c5"  value="c5">c5
-     <input type="checkbox" name ="seat" id="c6"  value="c6">c6
-     <input type="checkbox" name ="seat" id="c7"  value="c7">c7
-     <input type="checkbox" name ="seat" id="c8"  value="c8">c8
-     <input type="checkbox" name ="seat" id="c9"  value="c9">c9
-     <input type="checkbox" name ="seat" id="c10"  value="c10">c10<br/>
-         
-     
-     
-     <input type="hidden" name="form" value="bookticketsmethod3">
+String Fare = "100";
+
+
+System.out.println(Fare);
+int iNoPass=0,iFare=0;
+if(Fare!=null){
+	 iFare = Integer.parseInt(Fare);
+}
+System.out.println(iFare);
+if(NoPass!=null){
+	 iNoPass = Integer.parseInt(NoPass);
+}
+System.out.println(iNoPass);
+int tFare = iFare*iNoPass;
+System.out.println("Total Fare:"+tFare);
+session.setAttribute("Fare",tFare+"");
+
+
+int count=0,NumRows=0;
+String BookedSeats="";
+try
+{
+	/*Connection to MySQL database is made with JDBC class one driver*/
+	con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gat?useSSL=false","root", "Tejasgr108@");
+	
+	stmt = con.createStatement();
+	String Qry1 = "Select seat1 from book1";
+	System.out.println(Qry1);
+	rs1 = stmt.executeQuery(Qry1);
+	while(rs1.next()){
+		BookedSeats+=rs1.getString(1);
+	}
+	System.out.println("Seats already booked"+BookedSeats);
+	stmt.close();
+	con.close();
+}
+catch(Exception e)
+{
+	System.out.println("Exception"+e);
+}
+%>
+<style>
+.img{
+WIDTH:50px;
+HEIGHT:50px; 
+BORDER:0;
+}
+</style>
+
+UserName:<input type="text" name="username" placeholder="enter your username" required><br/>
+Choose your seats <FONT COLOR="red">*</FONT>&nbsp;<INPUT TYPE="text" NAME="Seats" class="TextField">
+<BR>
+<FONT COLOR="#333399" size="-1" face='Times new roman'><I>select from the available seats from the layout below</I></FONT>
+<H5>Bus Layout</H5>
+<INPUT TYPE="image" SRC="images/grey_seat.PNG" WIDTH="18" HEIGHT="17" BORDER="0">Available&nbsp;
+<IMG SRC="images/red_seat.PNG" WIDTH="18" HEIGHT="17" BORDER="0" ALT=""></IMG>Booked&nbsp;
+<IMG SRC="images/green_seat.PNG" WIDTH="18" HEIGHT="17" BORDER="0" ALT=""></IMG>Selected&nbsp;
+<BR><BR>
+<TABLE>
+<TR>
+	<SCRIPT LANGUAGE="JavaScript">
+	<!--
+		var BookedSeats = "<%=BookedSeats%>";
+		//alert(BookedSeats);
+		for(i=1;i<=10;i++){
+			if(BookedSeats.indexOf("a"+i)>-1){
+			document.writeln("<TD><IMG SRC=\"images/red_seat.PNG \" style=\"cursor:hand\" alt='a"+i+"' class=\"img\" onclick=\"alert('seat already booked');\"></TD>");
+			}else{
+			document.writeln("<TD><IMG SRC=\"images/grey_seat.PNG\" style=\"cursor:hand\" alt='a"+i+"' class=\"img\" onclick='toggleSelection(this)'></TD>");
+			}
+		}
+	//-->
+	</SCRIPT>
+</TR>
+<TR>
+	<SCRIPT LANGUAGE="JavaScript">
+	<!--
+		var BookedSeats = "<%=BookedSeats%>";
+		//alert(BookedSeats);
+		for(i=1;i<=10;i++){
+			if(BookedSeats.indexOf("b"+i)>-1){
+			document.writeln("<TD><IMG SRC=\"images/red_seat.PNG\" style=\"cursor:hand\" alt='b"+i+"' class=\"img\" onclick=\"alert('seat already booked');\"></TD>");
+			}else{
+			document.writeln("<TD><IMG SRC=\"images/grey_seat.PNG\" style=\"cursor:hand\" alt='b"+i+"' class=\"img\" onclick='toggleSelection(this)'></TD>");
+			}
+		}
+	//-->
+	</SCRIPT></TR>
+<TR>
+	<TD colspan=10 >&nbsp;</TD>
+</TR>
+<TR>
+	<SCRIPT LANGUAGE="JavaScript">
+	<!--
+		var BookedSeats = "<%=BookedSeats%>";
+		//alert(BookedSeats);
+		for(i=1;i<=10;i++){
+			if(BookedSeats.indexOf("c"+i)>-1){
+			document.writeln("<TD><IMG SRC=\"images/red_seat.PNG\" style=\"cursor:hand\" alt='c"+i+"' class=\"img\" onclick=\"alert('seat already booked');\"></TD>");
+			}else{
+			document.writeln("<TD><IMG SRC=\"images/grey_seat.PNG\" style=\"cursor:hand\" alt='c"+i+"' class=\"img\" onclick='toggleSelection(this)'></TD>");
+			}
+		}
+	//-->
+	</SCRIPT></TR>
+<TR>
+	<SCRIPT LANGUAGE="JavaScript">
+	<!--
+		var BookedSeats = "<%=BookedSeats%>";
+		//alert(BookedSeats);
+		for(i=1;i<=10;i++){
+			if(BookedSeats.indexOf("d"+i)>-1){
+			document.writeln("<TD><IMG SRC=\"images/red_seat.PNG\" style=\"cursor:hand\" alt='d"+i+"' class=\"img\" onclick=\"alert('seat already booked');\"></TD>");
+			}else{
+			document.writeln("<TD><IMG SRC=\"images/grey_seat.PNG\" style=\"cursor:hand\" alt='d"+i+"' class=\"img\" onclick='toggleSelection(this)'></TD>");
+			}
+		}
+	//-->
+	</SCRIPT></TR>
+	 <input type="hidden" name="form" value="bookticketsmethod2">
      <input type="submit" name="book" class="btn btn-primary" value="book">
-     
-     
+	
+</TABLE>
 
-</form>
-
-
-
-</body>
-</html>
+</FORM>
+</BODY>
+</HTML>

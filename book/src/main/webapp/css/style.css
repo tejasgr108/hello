@@ -2137,3 +2137,10 @@ section {
 #footer .credits a:hover {
   color: white;
 }
+
+.img{
+WIDTH:18px;
+HEIGHT:20px; 
+BORDER:0;
+}
+

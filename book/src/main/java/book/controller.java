@@ -12,16 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
 
+
 import BookTicket.BookTicket;
 import BookTicket.BookTicket1;
 import BookTicket.BookTicket2;
+import model.bookingmodel;
 import model.hibernatemodel;
 
 
 @WebServlet("/controller") public class controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	   
+	
 	   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String page =request.getParameter("page");
 			page =page.toLowerCase();
@@ -52,13 +53,15 @@ import model.hibernatemodel;
 			case "homepage":
 				homepage(request,response);
 				break;
-			default:
+			
+			default: 
 				errorpage(request,response);
 			}
 			
 			}
   
-	
+
+
 	private void bookradheshyam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("title", "BookTicket for radheshyam");
 		request.getRequestDispatcher("/bookradheshyam.jsp").forward(request, response);
@@ -134,37 +137,34 @@ import model.hibernatemodel;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String book = request.getParameter("form");
 		if(book.equals("bookticketsmethod1")){
-			String[] seats = request.getParameterValues("seat");
-			String seat ="";
-			for (int i=0;i<seats.length;i++) {
-				 seat += seats[i]+"";
-			}
-			BookTicket booknewticket =new BookTicket(seat) ;
-			bookticketmethod(booknewticket);
+                String seat = request.getParameter("Seats");
+                String username =request.getParameter("username");               
+                BookTicket booknewticket = new BookTicket(seat,username);
+                bookticketmethod(booknewticket);
+                
 			
 			request.getRequestDispatcher("/homepage.jsp").forward(request, response);
 		}
 			
 		else if(book.equals("bookticketsmethod2")){
-			String[] seats = request.getParameterValues("seat");
-			String seat ="";
-			for (int i=0;i<seats.length;i++) {
-					seat += seats[i]+"";
-			}
-			BookTicket1 booknewticket1 =new BookTicket1(seat) ;
-			bookticketmethod1(booknewticket1);
+			
+                String seat = request.getParameter("Seats");
+                String username = request.getParameter("username");
+                
+                BookTicket1 booknewticket1 = new BookTicket1(seat,username);
+                bookticketmethod1(booknewticket1);
+			
 			request.getRequestDispatcher("/homepage.jsp").forward(request, response);
 			
 			
 		}
 		else if(book.equals("bookticketsmethod3")){
-			String[] seats = request.getParameterValues("seat");
-			String seat ="";
-			for (int i=0;i<seats.length;i++) {
-				 seat += seats[i]+"";
-			}
-			BookTicket2 booknewticket2 =new BookTicket2(seat) ;
-			bookticketmethod2(booknewticket2);
+			 String seat = request.getParameter("Seats");
+			 String username = request.getParameter("username");
+             BookTicket2 booknewticket2 = new BookTicket2(seat,username);
+            
+             bookticketmethod2(booknewticket2);
+			
 			request.getRequestDispatcher("/homepage.jsp").forward(request, response);
 			
 		}
@@ -172,7 +172,7 @@ import model.hibernatemodel;
 			User createuser = new User(request.getParameter("first_name"),
 					request.getParameter("last_name"), request.getParameter("username"),
 					request.getParameter("password"),request.getParameter("email"),request.getParameter("contact"));
-			createusermethod(createuser);
+			createusermethod(createuser );
 			request.getRequestDispatcher("/homepage.jsp").forward(request, response);
 			
 		}
@@ -193,7 +193,7 @@ import model.hibernatemodel;
 
 
 	private void bookticketmethod2(BookTicket2 booknewticket2) {
-           new hibernatemodel().booktickett3(booknewticket2);
+		new bookingmodel().booktickett3(booknewticket2);
 		
 		return;
 		
@@ -202,7 +202,7 @@ import model.hibernatemodel;
 
 
 	private void bookticketmethod1(BookTicket1 booknewticket1) {
-         new hibernatemodel().booktickett2(booknewticket1);
+		new bookingmodel().booktickett2(booknewticket1);
 		
 		return;
 		
@@ -218,13 +218,14 @@ import model.hibernatemodel;
 	}
 
 	private void createusermethod(User createuser) {
-	      new hibernatemodel().createuser( createuser);
+	      
+		new hibernatemodel().createuser( createuser);
 		
 	}
 
 
 	private void bookticketmethod(BookTicket booknewticket) {
-		new hibernatemodel().booktickett1(booknewticket);
+		new bookingmodel().booktickett1(booknewticket);
 		
 		return;
 		

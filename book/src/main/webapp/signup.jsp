@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col-lg-6">
 		
-<form action="<%=request.getContextPath()%>/controller" method="post" onsubmit="return execute()">
+<form action="<%=request.getContextPath()%>/controller" method="post" onclick="return execute()">
             <h1>Create User</h1>
 			<table style="with: 50%">
 				<tr>
@@ -24,7 +24,7 @@
 				</tr>
 				<tr>
 					<td>Last Name</td>
-					<td><input type="text" name="last_name" id="last_name" class="form-control" placeholder="lastname" /></td>
+					<td><input type="text" name="last_name" id="last_name" class="form-control" placeholder="lastname" required /></td>
 				</tr>
 				<tr>
 					<td>UserName</td>
@@ -36,11 +36,11 @@
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td><input type="text" name="email" id="email" class="form-control" placeholder="email"  required/></td>
+					<td><input type="text" name="email" id="email" class="form-control" placeholder="email" required /></td>
 				</tr>
 				<tr>
 					<td>Contact No</td>
-					<td><input type="text" name="contact" id="contact" class="form-control" placeholder="contactno" required/></td>
+					<td><input type="text" name="contact" id="contact" class="form-control" placeholder="contactno" required /></td>
 				</tr></table><br/>
 			<input type="hidden" name="form" value="createusermethod"><br/>
 			<input type="submit" class="btn btn-primary" value="Submit" />
@@ -70,47 +70,35 @@
 					
 					return false;
 				}
-				else{
-					return true;
 				}
 				if(!lastname.test(laname)||lname.value ==""){
 					  alert("enter a valid lastname");
 					  
 					  return false;
 				}
-				else{
-					return true;
 				}
 				if(!username.test(uname) || uname.value ==""){
 					alert("enter a valid username ");
 					
 					return false;
 				}
-				else{
-					return true;
 				}
 				if(!password.test(pd)|| pd.value == ""){
 					alert("enter a valid password");
 					
 					return false;
 				}
-				else{
-					return true;
 				}
 				if(!email.test(mail)||mail.value ==""){
 					alert("enter a valid mail id");
 					
 					return false;
 				}
-				else{
-					return true;
 				}
 				if(!contact.test(no)||no.value =="")){
 					alert("enter a valid contact no");
 					return false;
 				}
-				else{
-					return true;
 				}
 			}
 			

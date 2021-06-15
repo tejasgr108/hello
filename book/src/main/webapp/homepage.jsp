@@ -51,7 +51,7 @@
        
         <a href="<%=request.getContextPath() %>/controller?page=signup"  class="get-started-btn ml-auto">signup</a><br/>
         <a href="<%=request.getContextPath() %>/controller?page=signin"  class="get-started-btn ml-auto">signin</a><br/>
-        <a href="<%=request.getContextPath() %>/controller?page=displaymovies"  class="get-started-btn ml-auto">displaymovies</a><br/>
+       
       
       
        
@@ -138,6 +138,8 @@
 
   <!-- Template Main JS File -->
   <script src="js/main.js"></script>
+  
+ 
   
   
   <!-- ======= Footer ======= -->

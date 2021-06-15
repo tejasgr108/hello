@@ -5,6 +5,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>signin</title>
+<style>
+form{margin-top:100px;}
+</style>
 </head>  
 <%@ include file="include/header.jsp" %>
 <body>
